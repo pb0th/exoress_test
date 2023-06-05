@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('Clone Repository') {
       steps {
-        git 'https://github.com/your-username/your-express-app.git'
+        git 'https://github.com/pb0th/exoress_test.git'
       }
     }
 
