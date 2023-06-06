@@ -19,7 +19,7 @@ pipeline {
           remote.host = '172.105.215.240'
           remote.user = 'root'
           remote.allowAnyHosts = true
-          remote.password = "${SSH_CREDENTIALS_PASSWORD}"
+          remote.password = "${SSH_CREDENTIALS_USR}:${SSH_CREDENTIALS_PSW}"
 
           sshCommand remote: remote, command: 'git clone https://github.com/pb0th/exoress_test.git'
           sshCommand remote: remote, command: 'cd exoress_test && docker build -t express_docker_test_image .'
