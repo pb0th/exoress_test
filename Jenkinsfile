@@ -10,16 +10,15 @@ pipeline {
 
         stage('Deploy to Server 2') {
             environment {
-                SSH_USERNAME = credentials('123jenkins').username
-                SSH_PASSWORD = credentials('123jenkins').password
+                SSH_CREDENTIALS = credentials('123jenkins')
             }
             steps {
                 script {
                     def remote = [:]
                     remote.name = 'Server 2'
                     remote.host = '172.105.215.240'
-                    remote.user = env.SSH_USERNAME
-                    remote.password = env.SSH_PASSWORD
+                    remote.user = SSH_CREDENTIALS.username
+                    remote.password = SSH_CREDENTIALS.password
 
                     sshCommand remote: remote, command: 'git clone https://github.com/pb0th/exoress_test.git'
                     sshCommand remote: remote, command: 'cd exoress_test && docker build -t express_docker_test_image .'
