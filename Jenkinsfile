@@ -2,24 +2,25 @@ pipeline {
   agent any
 
   stages {
-
-
-    stage('Install Dependencies') {
-      steps {
-        sh 'npm install'
-      }
-    }
-
-    // stage('Run Tests') {
+    // stage('Clone Repository') {
     //   steps {
-    //     sh 'npm test'
+    //     git 'https://github.com/your/repository.git'
     //   }
     // }
 
-    stage('Build and Deploy') {
+    stage('Build Docker Image') {
       steps {
-        // sh 'npm run build'
-        sh 'npm start'
+        script {
+          docker.build('express_docker_test_image')
+        }
+      }
+    }
+
+    stage('Deploy to Docker Container') {
+      steps {
+        script {
+          sh 'docker run -d -p 3005:3000 --name express_docker_test express_docker_test_image'
+        }
       }
     }
   }
