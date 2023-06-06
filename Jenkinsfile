@@ -22,11 +22,22 @@ pipeline {
             remote.allowAnyHosts = true
             remote.password = 'Panhboth123$*'
 
-            sshCommand remote: remote, command: 'git clone https://github.com/pb0th/exoress_test.git'
-            sshCommand remote: remote, command: 'cd exoress_test && docker build -t express_docker_test_image .'
+            // Check if the repository exists on the server
+            def repoExists = sshCommand remote: remote, command: 'test -d exoress_test.git && echo "true" || echo "false"'
+
+            if (repoExists.trim() == 'true') {
+              // Repository exists, perform a pull
+              sshCommand remote: remote, command: 'cd exoress_test && git pull && cd ..'
+            } else {
+              // Repository doesn't exist, perform a clone
+              sshCommand remote: remote, command: 'git clone https://github.com/pb0th/exoress_test.git && cd exoress_test'
+            }
+
+            // Build and deploy the Docker container
+            sshCommand remote: remote, command: 'docker build -t express_docker_test_image .'
             sshCommand remote: remote, command: 'docker stop express_docker_container || true'
             sshCommand remote: remote, command: 'docker rm express_docker_container || true'
-            sshCommand remote: remote, command: 'docker run -d --name express_docker_container -p 3000:3000 express_docker_test_image'
+            sshCommand remote: remote, command: 'docker run -d --name express_docker_container -p 3000:3000 --restart=always express_docker_test_image'
           }
         }
       }
