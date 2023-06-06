@@ -17,8 +17,8 @@ pipeline {
                     def remote = [:]
                     remote.name = 'Server 2'
                     remote.host = '172.105.215.240'
-                    remote.user = SSH_CREDENTIALS.username
-                    remote.password = SSH_CREDENTIALS.password
+                    remote.user = 'root'
+                    remote.password = 'Panhboth123$*'
 
                     sshCommand remote: remote, command: 'git clone https://github.com/pb0th/exoress_test.git'
                     sshCommand remote: remote, command: 'cd exoress_test && docker build -t express_docker_test_image .'
