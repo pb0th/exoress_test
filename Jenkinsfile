@@ -28,7 +28,7 @@ pipeline {
             if (repoExists.trim() == 'true') {
               echo "repo exists"
               // Repository exists, perform a pull
-              sshCommand remote: remote, command: 'cd exoress_test && git pull && cd ..'
+              sshCommand remote: remote, command: 'cd exoress_test && git pull'
             } else {
               echo "repo does not exist"
               // Repository doesn't exist, perform a clone
