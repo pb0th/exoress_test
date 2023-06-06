@@ -23,7 +23,7 @@ pipeline {
             remote.password = 'Panhboth123$*'
 
             // Check if the repository exists on the server
-            def repoExists = sshCommand remote: remote, command: 'test -d exoress_test.git && echo "true" || echo "false"'
+            def repoExists = sshCommand remote: remote, command: 'test -d exoress_test && echo "true" || echo "false"'
 
             if (repoExists.trim() == 'true') {
               echo "repo exists"
