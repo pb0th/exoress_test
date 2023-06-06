@@ -26,9 +26,11 @@ pipeline {
             def repoExists = sshCommand remote: remote, command: 'test -d exoress_test.git && echo "true" || echo "false"'
 
             if (repoExists.trim() == 'true') {
+              echo "repo exists"
               // Repository exists, perform a pull
               sshCommand remote: remote, command: 'cd exoress_test && git pull && cd ..'
             } else {
+              echo "repo does not exist"
               // Repository doesn't exist, perform a clone
               sshCommand remote: remote, command: 'git clone https://github.com/pb0th/exoress_test.git && cd exoress_test'
             }
