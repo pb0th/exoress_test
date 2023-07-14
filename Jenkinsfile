@@ -5,7 +5,7 @@ pipeline {
         stage('SSH into remote server') {
             steps {
                 script {
-                    sshagent(['<path_to_private_key>']) {
+                    sshagent(['server_2_ssh']) {
                         sh '''
                             ssh -o StrictHostKeyChecking=no root@172.104.112.10 <<EOF
                                 # Step 2: Check if the folder exists
