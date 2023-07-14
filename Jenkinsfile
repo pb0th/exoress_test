@@ -9,10 +9,10 @@ pipeline {
                         // SSH into the remote server and execute commands
                         def remoteCommands = """
                             ssh -o StrictHostKeyChecking=no -l root 172.104.112.10 "
-                                if [ -d 'express_test' ]; then
-                                    cd express_test && git pull origin main
+                                if [ -d 'exoress_test' ]; then
+                                    cd exoress_test && git pull origin main
                                 else
-                                    git clone https://github.com/pb0th/exoress_test.git express_test
+                                    git clone https://github.com/pb0th/exoress_test.git exoress_test
                                 fi;
                                 
                                 docker ps -a --filter name=exoress_test_container --format '{{.Names}}' | grep -q 'exoress_test_container'
@@ -21,8 +21,8 @@ pipeline {
                                     docker rm exoress_test_container
                                 fi;
                                 
-                                cd express_test && docker build -t express-app .
-                                docker run -d -p 9000:9000 --name exoress_test_container express-app
+                                cd exoress_test && docker build -t exoress-app .
+                                docker run --rm -d -p 9000:9000 --name exoress_test_container exoress-app
                             "
                         """
                         sh remoteCommands
