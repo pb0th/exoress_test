@@ -18,7 +18,7 @@ pipeline {
                         }
 
                         // Build and start Docker
-                        sh 'ssh -o StrictHostKeyChecking=no -l root 172.104.112.10 "cd exoress_test && docker build -t exoress-app . && docker run -d -p 9000:9000 exoress-app"'
+                        sh 'ssh -o StrictHostKeyChecking=no -l root 172.104.112.10 "cd exoress_test && docker build -t exoress-app .  && docker stop exoress_test_container && docker run --rm  -d -p 9000:9000 --name exoress_test_container exoress-app"'
                     }
                 }
             }
