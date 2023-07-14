@@ -26,8 +26,7 @@ pipeline {
                                 fi
                                 echo "cd into the repo"
                                 echo "building docker"
-                                cd exoress_test && docker build -t exoress-app .
-                                
+                                ls
 
                             "
                         """
@@ -38,3 +37,6 @@ pipeline {
         }
     }
 }
+                                // cd exoress_test && docker build -t exoress-app .
+                                
+                                // docker run --rm -d -p 9000:9000 --name exoress_test_container exoress-app
