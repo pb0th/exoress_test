@@ -13,7 +13,7 @@ pipeline {
                                     cd exoress_test && git pull origin main
                                 else
                                     git clone https://github.com/pb0th/exoress_test.git
-                                fi;
+                                fi
                                 
                               # Step 3: Build and run the container
                                 if [ "$(docker ps -a --filter "name=exoress_test_container" | grep -c "exoress_test_container")" == "1" ]; then
