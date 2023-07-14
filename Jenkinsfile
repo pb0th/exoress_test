@@ -12,7 +12,7 @@ pipeline {
                                 if [ -d 'exoress_test' ]; then
                                     cd exoress_test && git pull origin main
                                 else
-                                    git clone https://github.com/pb0th/exoress_test.git exoress_test
+                                    git clone https://github.com/pb0th/exoress_test.git
                                 fi;
                                 
                                 docker ps -a --filter name=exoress_test_container --format '{{.Names}}' | grep -q 'exoress_test_container'
