@@ -10,7 +10,7 @@ pipeline {
                         def remoteCommands = """
                             ssh -o StrictHostKeyChecking=no -l root 172.104.112.10 "
                                 if [ -d 'express_test' ]; then
-                                    cd express_test && git pull
+                                    cd express_test && git pull origin main
                                 else
                                     git clone https://github.com/pb0th/exoress_test.git express_test
                                 fi;
