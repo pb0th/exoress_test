@@ -9,7 +9,9 @@ pipeline {
                         // SSH into the remote server and execute commands
                         def remoteCommands = """
                             ssh -o StrictHostKeyChecking=no -l root 172.104.112.10 "
+                                echo 'looking'
                                 if [ -d 'exoress_test' ]; then
+
                                     cd exoress_test && git pull origin main
                                 else
                                     git clone https://github.com/pb0th/exoress_test.git exoress_test
