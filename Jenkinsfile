@@ -21,11 +21,13 @@ pipeline {
                                 fi
                                 
                                 if docker ps -a --format '{{.Names}}' | grep -q 'exoress_test_container'; then
-                                    echo "container exists"
+                                    echo "container exists so stop the container"
                                     docker stop exoress_test_container
                                 fi
                                 echo "cd into the repo"
+                                echo "building docker"
                                 cd exoress_test && docker build -t exoress-app .
+                                
                                 docker run --rm -d -p 9000:9000 --name exoress_test_container exoress-app
                             "
                         """
